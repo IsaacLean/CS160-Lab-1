@@ -4,24 +4,41 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <title>2D Sierpinski Gasket</title>
 
+<style>
+	body {
+		background-color: #000;
+	}
+
+	canvas {
+		background-color: #000;
+	}
+</style>
 
 <script id="vertex-shader" type="x-shader/x-vertex">
 attribute vec4 vPosition;
+varying vec4 vecPos;
 
 void
 main()
 {
     gl_Position = vPosition;
+    vecPos = vPosition;
 }
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 precision mediump float;
+varying vec4 vecPos;
 
 void
 main()
 {
-    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+	if(vecPos.y > 0.1) {
+    	gl_FragColor = vec4( 0.84, 0.84, 0.84, 1.0 );
+	} else {
+		gl_FragColor = vec4( 0.0, 1.0, 0.0, 1.0 );
+	}
+	//console.log(vecPos);
 }
 </script>
 
